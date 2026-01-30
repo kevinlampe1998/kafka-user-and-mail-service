@@ -1,0 +1,5 @@
+// how to run fast-data-dev
+https://github.com/lensesio/fast-data-dev/wiki
+
+// how to implement producer & consumer in spring boot
+https://medium.com/@issa.khodadadi88/implementing-kafka-producer-and-consumer-in-spring-boot-75796f0ce242

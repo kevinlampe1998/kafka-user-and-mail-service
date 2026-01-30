@@ -1,0 +1,23 @@
+curl -X GET http://localhost:8080/users
+
+curl -X GET http://localhost:8080/users/1
+
+curl -X POST http://localhost:8080/users \
+     -H "Content-Type: application/json" \
+     -d '{
+           "firstname": "Bruce",
+           "lastname": "Willis",
+           "username": "bruce.w",
+           "email": "bruce@example.com",
+           "password": "secret789"
+         }'
+
+curl -X PUT http://localhost:8080/users/1 \
+     -H "Content-Type: application/json" \
+     -d '{
+           "firstname": "Dwayne",
+           "lastname": "Johnson",
+           "username": "dwayne.johnson.updated",
+           "email": "dwayne.new@example.com",
+           "password": "password123"
+         }'
