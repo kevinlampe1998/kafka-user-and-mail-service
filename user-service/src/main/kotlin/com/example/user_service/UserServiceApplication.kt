@@ -16,8 +16,19 @@ import org.springframework.stereotype.Component
 @SpringBootApplication
 class UserServiceApplication {
 
+	@Bean // kafka topic definition as spring bean // @Bean spring managing it as object
+	fun topic() = NewTopic("topic1", 10, 1) // creates a new topic
+	// parameter
+	// name = name of the topic
+	// numPartitions = amount of the partitions // a partition is a datafile which contains sorted logs
+	//     - inside a partition the messages are sorted
+	//     - between partitions, they are not sorted
+	// replicationFactor = amount of broker where the data are replicated
+	//     - 1: no backup
+	//     - >1: 1 "Leader" + remaining number "Replicas"
+
 	@Bean
-	fun topic() = NewTopic("topic1", 10, 1)
+	fun userCreatedTopic() = NewTopic("user-created", 10, 2)
 
 	@Bean
 	fun runner(template: KafkaTemplate<String, String>) = ApplicationRunner {

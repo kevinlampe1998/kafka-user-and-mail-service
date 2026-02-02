@@ -2,13 +2,21 @@ package com.example.user_service.user
 
 import com.example.user_service.user.UserEntity
 import com.example.user_service.user.UserRepository
+import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Service
 import java.util.*
+import kotlin.toString
 
 @Service
-class UserService(private val repository: UserRepository) {
+class UserService(
+    private val repository: UserRepository,
+    private val kafkaTemplate: KafkaTemplate<String, String>
+) {
 
-    fun createUser(user: UserEntity): UserEntity = repository.save(user)
+    fun createUser(user: UserEntity): UserEntity {
+        kafkaTemplate.send("user_created", user.firstname + " " + user.lastname)
+        return repository.save(user)
+    }
 
     fun getAllUsers(): List<UserEntity> = repository.findAll()
 

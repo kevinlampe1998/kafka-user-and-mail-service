@@ -21,3 +21,13 @@ curl -X PUT http://localhost:8080/users/1 \
            "email": "dwayne.new@example.com",
            "password": "password123"
          }'
+
+curl -X POST http://localhost:8080/users \
+     -H "Content-Type: application/json" \
+     -d '{
+           "firstname": "Jessica",
+           "lastname": "Alba",
+           "username": "jessica.alba",
+           "email": "jessica.alba@example.com",
+           "password": "password123"
+         }'
