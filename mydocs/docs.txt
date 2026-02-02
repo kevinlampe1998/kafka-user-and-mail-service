@@ -1,0 +1,40 @@
+// how to run fast-data-dev
+https://github.com/lensesio/fast-data-dev/wiki
+- docker run --rm -it --net=host landoop/fast-data-dev
+
+// start lensesio container
+https://github.com/lensesio/fast-data-dev
+Basic Usage
+docker run -d --name fast-data-dev \
+  -p 9092:9092 \
+  -p 8081:8081 \
+  -p 8083:8083 \
+  -p 3030:3030 \
+  lensesio/fast-data-dev
+
+docker stop fast-data-dev // stops a container
+docker rm fast-data-dev // removes container permantly, works only if "docker stop" was used before
+
+docker run -d --name fast-data-dev \ // -d detached (run in background), --name: set name for container
+  -p 9092:9092 \ // -p: publish a container's port to the host // <Host-Port:Container-Port> // 9092: kafka itself
+  -p 8081:8081 \ // 8081: Schema Registry
+  -p 8083:8083 \ // 8083: Kafka Connect REST API
+  -p 3030:3030 \ // 3030: Web UI, Monitoring, fast-data-dev-ui
+  -e ADV_HOST=localhost \ // -e: set environment variable, ADV_HOST=localhost: tells to container that host address is localhost
+  -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 \
+  // KAFKA_ADVERTISED_LISTENERS: tells kafka, which address clients can contact
+  // PLAINTEXT://localhost:9092: simple not crypted access through localhost and port 9092
+  lensesio/fast-data-dev // image, which will be used, this one is on docker hub and will be downloaded if not exist
+
+
+// how to implement producer & consumer in spring boot
+https://medium.com/@issa.khodadadi88/implementing-kafka-producer-and-consumer-in-spring-boot-75796f0ce242
+- spring.kafka.bootstrap-servers=localhost:9092
+
+// checking if it listening for client connections (9092 default)
+https://developer.confluent.io/faq/apache-kafka/kafka-operations/
+- nc -zv localhost 9092
+
+// run single yml file with docker
+https://stackoverflow.com/questions/44364916/how-to-open-run-yml-compose-file
+docker-compose -f filename.yml up -d

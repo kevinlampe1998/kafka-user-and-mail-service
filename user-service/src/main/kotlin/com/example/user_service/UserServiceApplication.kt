@@ -23,7 +23,6 @@ class UserServiceApplication {
 	fun runner(template: KafkaTemplate<String, String>) = ApplicationRunner {
 		println("kafka runner")
 		template.send("topic1", "test") }
-
 }
 
 fun main(args: Array<String>) {
@@ -37,7 +36,7 @@ class StartupRunner(private val repository: UserRepository) {
 	@EventListener(ApplicationReadyEvent::class)
 	fun runAfterStartup() {
 		val allUsers = repository.findAll()
-		logger.info("Number of users in DB: ${allUsers.size}")
+		logger.info("allUsers.size ${allUsers.size}")
 		allUsers.forEach { println(it) }
 	}
 }
